@@ -42,10 +42,17 @@ public class CalenderMethods {
 		// Getting the tittle of first month
 		if (firstMonthDivision.findElement(By.xpath("//div[@class='DayPicker-Caption']/div")).getText()
 				.contains("December")) {
-			//// div[@class='DayPicker-Day']/div/p[1]
-			List<WebElement> toKnowSize = firstMonthDivision
+			List<WebElement> calenderDates = firstMonthDivision
 					.findElements(By.xpath("//div[@class='DayPicker-Day']/div/p[1]"));
-			System.out.println(toKnowSize);
+			for (int i = 0; i < calenderDates.size(); i++) {
+				String date = calenderDates.get(i).getText();
+				if (date.contains("19")) {
+					firstMonthDivision
+							.findElement(By.xpath("//div[@class='DayPicker-Months']/div[1]/div[3]/div[3]/div[7]"))
+							.click();
+					break;
+				}
+			}
 		} else if (secondMonth.findElement(By.xpath("//div[@class='DayPicker-Caption']/div")).getText()
 				.contains("December")) {
 			System.out.println("December Not Found");
