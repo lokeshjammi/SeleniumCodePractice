@@ -30,16 +30,24 @@ public class CalenderMethods {
 		driver.manage().window().maximize();
 //		driver.findElement(By.xpath("//div[@class='minContainer']")).click();
 		driver.findElement(By.xpath("//div[@class='fsw ']/div/div[3]")).click();
+		searchForTargetMonths();
 		Thread.sleep(2000);
 	}
 
-	public void searchForTargetMonths() {
+	public void searchForTargetMonths() throws InterruptedException {
 		WebElement monthsDivision = driver.findElement(By.xpath("//div[@class='DayPicker-Months']"));
 		List<WebElement> monthDivision = monthsDivision.findElements(By.xpath("//div[@class='DayPicker-Month']"));
-		for (int i = 0; i < monthDivision.size(); i++) {
-			if (monthDivision.get(i).getText().contains("December")) {
+		WebElement firstMonth = monthsDivision.findElement(By.xpath("//div[@class='DayPicker-Months']/div[1]"));
+		WebElement secondMonth = monthsDivision.findElement(By.xpath("//div[@class='DayPicker-Months']/div[2]"));
+		// Getting the tittle of first month
+		if (firstMonth.findElement(By.xpath("//div[@class='DayPicker-Caption']/div")).getText().contains("December")) {
 
-			}
+		} else if (secondMonth.findElement(By.xpath("//div[@class='DayPicker-Caption']/div")).getText()
+				.contains("December")) {
+
+		} else {
+
 		}
+		Thread.sleep(2000);
 	}
 }
