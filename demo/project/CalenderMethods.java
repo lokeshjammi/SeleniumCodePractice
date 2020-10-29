@@ -37,16 +37,20 @@ public class CalenderMethods {
 	public void searchForTargetMonths() throws InterruptedException {
 		WebElement monthsDivision = driver.findElement(By.xpath("//div[@class='DayPicker-Months']"));
 		List<WebElement> monthDivision = monthsDivision.findElements(By.xpath("//div[@class='DayPicker-Month']"));
-		WebElement firstMonth = monthsDivision.findElement(By.xpath("//div[@class='DayPicker-Months']/div[1]"));
+		WebElement firstMonthDivision = monthsDivision.findElement(By.xpath("//div[@class='DayPicker-Months']/div[1]"));
 		WebElement secondMonth = monthsDivision.findElement(By.xpath("//div[@class='DayPicker-Months']/div[2]"));
 		// Getting the tittle of first month
-		if (firstMonth.findElement(By.xpath("//div[@class='DayPicker-Caption']/div")).getText().contains("December")) {
-
+		if (firstMonthDivision.findElement(By.xpath("//div[@class='DayPicker-Caption']/div")).getText()
+				.contains("December")) {
+			//// div[@class='DayPicker-Day']/div/p[1]
+			List<WebElement> toKnowSize = firstMonthDivision
+					.findElements(By.xpath("//div[@class='DayPicker-Day']/div/p[1]"));
+			System.out.println(toKnowSize);
 		} else if (secondMonth.findElement(By.xpath("//div[@class='DayPicker-Caption']/div")).getText()
 				.contains("December")) {
-
+			System.out.println("December Not Found");
 		} else {
-
+			System.out.println("Try others");
 		}
 		Thread.sleep(2000);
 	}
