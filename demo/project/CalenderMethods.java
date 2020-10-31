@@ -28,10 +28,8 @@ public class CalenderMethods {
 	public void test() throws InterruptedException {
 		driver.get(URL);
 		driver.manage().window().maximize();
-//		driver.findElement(By.xpath("//div[@class='minContainer']")).click();
 		driver.findElement(By.xpath("//div[@class='fsw ']/div/div[3]")).click();
 		searchForTargetMonths();
-		Thread.sleep(2000);
 	}
 
 	public void searchForTargetMonths() throws InterruptedException {
@@ -39,7 +37,10 @@ public class CalenderMethods {
 		List<WebElement> monthDivision = monthsDivision.findElements(By.xpath("//div[@class='DayPicker-Month']"));
 		WebElement firstMonthDivision = monthsDivision.findElement(By.xpath("//div[@class='DayPicker-Months']/div[1]"));
 		WebElement secondMonth = monthsDivision.findElement(By.xpath("//div[@class='DayPicker-Months']/div[2]"));
-		// Getting the tittle of first month
+		while (!(firstMonthDivision.findElement(By.xpath("//div[@class='DayPicker-Caption']/div")).getText()
+				.contains("December"))) {
+			driver.findElement(By.xpath("//span[@aria-label='Next Month']")).click();
+		}
 		if (firstMonthDivision.findElement(By.xpath("//div[@class='DayPicker-Caption']/div")).getText()
 				.contains("December")) {
 			List<WebElement> calenderDates = firstMonthDivision
@@ -53,12 +54,6 @@ public class CalenderMethods {
 					break;
 				}
 			}
-		} else if (secondMonth.findElement(By.xpath("//div[@class='DayPicker-Caption']/div")).getText()
-				.contains("December")) {
-			System.out.println("December Not Found");
-		} else {
-			System.out.println("Try others");
 		}
-		Thread.sleep(2000);
 	}
 }
